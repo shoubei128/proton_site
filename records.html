@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <!--<meta name="theme-color" content="#000000">-->
+    <meta content="email=no" name="format-detection" />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <title>Proton Token 千万糖果大放送，等你来瓜分！</title>
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/details.css">
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="shortcut icon" href="img/logo.png" type="./img/x-icon">
+    <script src="./js1/fontSize.js"></script>
+    <script src="./untils/until.js"></script>
+    <script src="./fetch/ajax.js"></script>
+</head>
+<body>
+    <div class="details">
+        <div class="details-total">
+            <div class="details-total-money" style="margin:0 auto;">
+                <div class="details-total-img">
+                    <img src="./img/money.png" alt="" />
+                </div>
+                <div class="details-total-text" i18n="secondHeadRight">
+                </div>
+                <span class="details-total-people" id="total-money"></span>
+            </div>
+        </div>
+        <div class="footer" style="padding-top: 0.5rem;margin-bottom: 0.5rem;">
+            <button type="button" class="footer-btn" onclick="check()" i18n="btn" style="margin-top: 0;">提取PTT</button>
+        </div>
+        <div class="detail-invite">
+            <div class="details-total-tip" i18n="recordTip" style="margin: 0 auto;">任何问题请联系info@proton.global。</div>
+        </div>
+    </div>
+    <div class="iostoast">
+        <div class="container">
+            <p class="p-right" id="p-right" onclick="close()">关闭</p>
+            <p class="p-content" id="p-content"></p>
+        </div>
+    </div>
+    <script src="./js1/index.js"></script>
+    <script src="./js1/jquery-3.3.1.min.js"></script>
+    <script src="./js1/jquery.i18n.min.js"></script>
+    <script src="./js1/clipboard.js"></script>
+    <script type="text/javascript">
+        function close () {
+            $(".iostoast").hide();
+        }
+        // 国际化
+        $(document).ready(function () {
+            /*默认语言*/
+            // 如果没有localstorage 的detaildata说明没有登录返回login
+            if (getAddressDetails()) {
+                addressAjax()   //为了停留在当前页面再次请求接口
+            }else{
+                window.location.href ="./share.html"
+            }
+            var defaultLang = "cn";
+            if (untils.getItem("lang") == "en") {
+                defaultLang = "en";
+            }else{
+                defaultLang = "cn";
+            }
+            $("[i18n]").i18n({
+                defaultLang: defaultLang,
+                filePath: "./i18n/",
+                filePrefix: "i18n_",
+                fileSuffix: "",
+                forever: true,
+                callback: function () {
+                    console.log("i18n has been completed.");
+                }
+            });
+            //  var detaildata = untils.getItem("detaildata");
+        });
+        function getAddressDetails() {
+            // 获取上一个页面的数据
+            var detailData = untils.getCookieValue("address");
+            console.log(detailData);
+            console.log(Boolean(detailData));
+            if (detailData) {
+                return true;
+            } else {
+                return false;
+            }
+            // 取到json数据就进行字符串拼接
+        }
+        function check() {
+            var params = {
+                ethAddress: untils.getCookieValue("address"),
+            };
+            var api = 'http://api.bangtuike.com.cn/api/v1/proton/award';
+            $.ajax({
+                url: api,
+                type: "post",
+                data: params,
+                success: function (response) {
+                    if (untils.getItem("lang") == "cn") {
+                        if (response.code == 0) {
+                            alert('恭喜你提币成功，糖果依次发放请勿着急，详情可咨询客服微信：qiangwei-12345');
+                        } else {
+                            alert('提币失败，请重试');
+                        }
+                    } else {
+                        if (response.code == 0) {
+                            alert("Congrats! You are verified! PTT tokens will be sent to your wallet according to the order of submissions. Please feel free for any questions by Telegram:@ReneeZhao");
+                        } else {
+                            alert("Sorry to inform you that we haven't found your ETH wallet address. Please feel free for any questions by Telegram:@ReneeZhao");
+                        }
+                    }
+                    
+                },
+                error: function (response) {
+                    alert("Error");
+                }
+            });
+        }
+        // ajax请求 在第二个页面请求数据
+        function addressAjax() {
+            var params = {
+                ethAddress: untils.getCookieValue("address"),
+            };
+            var api = 'http://api.bangtuike.com.cn/api/v1/proton/record?ethAddress=' + untils.getCookieValue("address");
+            $.ajax({
+                url: api,
+                type: "get",
+                data: params,
+                success: function (response) {
+                    if (response.code == 0) {
+                        // 成功回调
+                        var useData = response.data;
+                        var html = '';
+                        $(useData.records).each(function (index , record) {
+                            var note = record.note;
+                            if (untils.getItem("lang") == "en") {
+                                if (record.note == '提币') {
+                                    note = 'Withdraw';
+                                } else if (record.note == '验证奖励') {
+                                    note = '1st time Reward';
+                                } else {
+                                    note = 'Invitation Reward';
+                                }
+                            }
+                            html += '<li class="detail-li">' +
+                                '<span>' + note + '</span>' +
+                                '<span style="float:right; text-align:right; padding-right: 0.5rem;">' + record.coins + '</span>' +
+                                '<br>' +
+                                '<span style="font-size: 8px;">' + record.created_at + '</span>' +
+                                '</li>';
+                        });
+                        $("#total-money").html(useData.coinNum);
+                        $("#recordUl").html(html);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (response) {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

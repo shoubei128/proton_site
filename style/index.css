@@ -1,0 +1,153 @@
+html{
+	background-color : #1c1d21;
+    /*background: linear-gradient(#393F4B, #1c1d21);*/
+}
+.container{
+    max-width: 750px;
+    margin : 0 auto ;
+}
+
+.top-img{
+    width : 100% ;
+    height : 5.45rem ;
+    position: relative ;
+}
+.top-top-title{
+    position: absolute;
+    top : 0.5rem ;
+    cursor: pointer ;
+    right : 0.3rem ;
+    font-size : 0.28rem;
+    color : #fff ;
+}
+
+.top-img img {
+    width : 100% ;
+    height : 100% ;
+}
+input,button,select,textarea {
+    outline: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.telegram {
+    height: 1.64rem;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.telegram-top {
+    height: 0.59rem;
+    width: 0.64rem;
+    margin: 0 auto;
+    border-top: 1px solid #393f4d;
+    border-left: 1px solid #393f4d;
+    border-right: 1px solid #393f4d;
+}
+
+.telegram-middle {
+    height: 0.49rem;
+    line-height: 0.49rem;
+    text-align: center;
+    display: block ;
+}
+
+.telegram-middle-text {
+    display: block;
+    font-family: "PingFangSC-Medium";
+    font-size: 0.28rem;
+    color: #0391f2;
+    text-decoration: none;
+}
+
+.telegram-bottom {
+    height: 0.59rem;
+    width: 0.64rem;
+    margin: 0 auto;
+    border-left: 1px solid #393f4d;
+    border-right: 1px solid #393f4d;
+    border-bottom: 1px solid #393f4d;
+}
+
+.telegram-bottom-one {
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-top: 5px solid #393f4d;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+.telegram-bottom-two {
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-top: 5px solid #393f4d;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
+.footer {
+    padding-top: 0.5rem;
+    margin-bottom : 0.5rem ;
+    width: 100%;
+}
+
+.footer-main{
+    padding : 0 0.3rem ;
+    position : relative ;
+}
+.footer-text {
+    display: block;
+    box-sizing: border-box ;
+    padding : 0 0.1rem ;
+    height: 0.93rem;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #393f4d;
+    border: none;
+    text-align: center;
+    font-size: 0.24rem;
+    color: beige;
+}
+
+.footer-text::-webkit-input-placeholder {
+    font-size: 0.19rem;
+    text-align: center;
+    font-family: "PingFangSC-Medium";
+    white-space: wrap ;
+    margin:0 auto ;
+}
+
+.footer-btn {
+    display: block;
+    background-color: #0391f2;
+    border: none;
+    color: #231815;
+    height: 0.93rem;
+    width: 6.94rem;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 0.42rem;
+    font-size: 0.28rem;
+}
+#fail{
+    position: absolute ;
+    width : 100% ;
+    top : -1.22rem ;
+    text-align: center;
+    display: none;
+    text-align: center;
+}
+.fail-message{
+    font-family: "PingFang-Light";
+    font-size: 0.3rem;
+    color: red;
+}

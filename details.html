@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <!--<meta name="theme-color" content="#000000">-->
+    <meta content="email=no" name="format-detection" />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <title>Proton Token 千万糖果大放送，等你来瓜分！</title>
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/details.css">
+    <link rel="shortcut icon" href="img/logo.png" type="./img/x-icon">
+    <script src="./js1/fontSize.js"></script>
+    <script src="./untils/until.js"></script>
+    <script src="./fetch/ajax.js"></script>
+</head>
+<body>
+    <div class="details">
+        <a href="./records.html">
+            <div class="details-total">
+                <div class="details-total-invite">
+                    <div class="details-total-img">
+                        <img src="./img/invite.png" alt=""/>
+                    </div>
+                    <div class="details-total-text" i18n="sectitle">
+                    </div>
+                    <span class="details-total-people" id="total-people"></span>
+                </div>
+                <div class="details-total-money">
+                    <div class="details-total-img">
+                        <img src="./img/money.png" alt="" />
+                    </div>
+                    <div class="details-total-text" i18n="secondHeadRight">
+                    </div>
+                    <span class="details-total-people" id="total-money"></span>
+                </div>
+            </div>
+        </a>
+        <div class="detail-invite">
+            <div class="detail-invite-title" i18n="contentTitle">
+                邀请好友
+            </div>
+            <div class="detail-invite-text" i18n="contentText">
+                分享以下链接邀请好友，额外获得188个PTT奖励。 （请您进群完成身份验证。验证成功后邀请链接生效，邀请奖励被记录）
+            </div>
+            <div class="detail-invite-link">
+                <span class="detail-invite-link-text  detail-invite-link-text-shorter" id="one"></span>
+                <span class="detail-invite-link-text detail-invite-link-text-sp" id="one-copy-main" ></span>
+                <span class="detail-invite-link-btn" id="oneCopy" onclick="copyLink()" i18n="insert" data-clipboard-target="#one-copy-main" data-clipboard-action="copy">复制</span>
+            </div>
+        </div>
+        <div class="detail-goteam">
+            <div class="detail-invite-title" i18n="enterGroup">
+                进入电报群
+            </div>
+            <div class="detail-invite-text" i18n="enterOne">
+                1.复制你的验证码，用于验证你的身份。
+            </div>
+            <div class="detail-invite-link">
+                <span class="detail-invite-link-text" id="two"></span>
+                <span class="detail-invite-link-btn" onclick="copyNum()" id="twoCopy" i18n="insert" data-clipboard-target="#two" data-clipboard-action="copy">复制</span>
+            </div>
+            <div class="detail-invite-text" i18n="enterSuccess">
+                2.点击入群，加入电报群（如果没有telegram，需要先下载）；进群后，将验证码发于群内，我们就会将PTT打入你的钱包。
+            </div>
+            <div class="detail-invite-link">
+                <span class="detail-invite-link-text">https://t.me/joinchat/G-waH0ZcAlvQPPBf5l3dsQ</span>
+                <a href="https://t.me/joinchat/G-waH0ZcAlvQPPBf5l3dsQ" class="detail-invite-link-btn" i18n="group">入群</a>
+            </div>
+        </div>
+    </div>
+    <div class="iostoast">
+        <div class="container">
+            <p class="p-right" id="p-right" onclick="close()">关闭</p>
+            <p class="p-content" id="p-content"></p>
+        </div>
+    </div>
+    <script src="./js1/index.js"></script>
+    <script src="./js1/jquery-3.3.1.min.js"></script>
+    <script src="./js1/jquery.i18n.min.js"></script>
+    <script src="./js1/clipboard.js"></script>
+    <script type="text/javascript">
+        //复制按钮
+        function copyLink() {
+            var clipboard = new Clipboard('#oneCopy', {
+                target: function () {
+                    return document.querySelector('#one-copy-main'); 
+                }
+            });
+            clipboard.on('success', function (e) {
+                // 中英文不同的复制提示语
+                if (untils.getItem("lang") == "en") {
+                   $("#oneCopy").html("OK!") ;
+                }else{
+                   $("#oneCopy").html("已复制") ;
+                }
+                console.log(e);
+            });
+            clipboard.on('error', function (e) {
+                console.log(e);
+            });
+            isIOs10("one-copy-main")
+        }
+        function copyNum() {
+            var clipboard = new Clipboard('#twoCopy', {
+                target: function () {
+                    return document.querySelector('#two');
+                }
+            });
+            clipboard.on('success', function (e) {
+                 if (untils.getItem("lang") == "en") {
+                    $("#twoCopy").html("OK!");
+                } else {
+                    $("#twoCopy").html("已复制");
+                }
+                console.log(e);
+            });
+            clipboard.on('error', function (e) {
+                console.log(e);
+            });
+            isIOs10("two")
+        }
+        $(".p-right").click(function() {
+             $(".iostoast").hide();
+        });
+
+        function close () {
+            $(".iostoast").hide();
+        }
+        function isIOs10 (id, choose) {
+            var ver = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+            ver = parseInt(ver[1], 10); 
+            if (ver < 10){
+               $("#p-content").html($("#" + id).html());
+               $(".iostoast").show();
+            };
+        }
+
+        // 国际化
+        $(document).ready(function () {
+            /*默认语言*/
+            // 如果没有localstorage 的detaildata说明没有登录返回login
+            if (getAddressDetails()) {
+                addressAjax()   //为了停留在当前页面再次请求接口
+            }else{
+                window.location.href ="./share.html"
+            }
+            var defaultLang = "cn";
+            if (untils.getItem("lang") == "en") {
+                defaultLang = "en";
+            }else{
+                defaultLang = "cn";
+            }
+            $("[i18n]").i18n({
+                defaultLang: defaultLang,
+                filePath: "./i18n/",
+                filePrefix: "i18n_",
+                fileSuffix: "",
+                forever: true,
+                callback: function () {
+                    console.log("i18n has been completed.");
+                }
+            });
+            //  var detaildata = untils.getItem("detaildata");
+        });
+        function getAddressDetails() {
+            // 获取上一个页面的数据
+            var detailData = untils.getCookieValue("address");
+            console.log(detailData);
+            console.log(Boolean(detailData));
+            if (detailData) {
+                return true;
+            } else {
+                return false;
+            }
+            // 取到json数据就进行字符串拼接
+        }
+        // ajax请求 在第二个页面请求数据
+        function addressAjax() {
+            var params = {};
+            params = {
+                ethAddress: untils.getCookieValue("address")
+            };
+            var api = 'http://api.bangtuike.com.cn/api/v1/proton/detail?ethAddress=' + untils.getCookieValue("address");
+            $.ajax({
+                url: api,
+                type: "get",
+                data: params,
+                success: function (response) {
+                    if (response.code == 0) {
+                        // 成功回调
+                        var useData = response.data;
+                        var newurl = "http://proton.global/share.html?code=" + useData.inviteCode;
+                        var newText = "PTT发糖果，入群可领288个，邀请一人奖励188个，入群链接 " + newurl;
+                        $("#two").html("/" + useData.checkCode);//验证码
+                        $("#one").html(newurl);//邀请链接
+                        $("#one-copy-main").html(newText);//邀请链接
+                        $("#total-people").html(useData.inviteCount);
+                        $("#total-money").html(useData.coinNum);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (response) {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

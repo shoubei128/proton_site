@@ -1,0 +1,23 @@
+{
+    "headPic": "../img/bg-en.png",
+    "indexhead": "Join in Telegram Group",
+    "placeholder": "Input your ETH wallet address (PTT wallet address of BigONE is preferred)",
+    "btn": "Receive PTT",
+    "sectitle": "Friends Invited",
+    "secondHeadRight": " PTT Received",
+    "contentTitle": "Invite friends",
+    "contentText": "Share the following link. Invite friends to receive additional 188 PTT awards. (Please enter the group and complete authentication. The invite link will take effect and your invitation will be recorded after successful authentication.)",
+    "insert": "Copy",
+    "enterGroup": "Join telegram",
+    "enterOne": "1.Copy your verification code for identification.",
+    "enterSuccess": "2.Click the button ”join” to join telegram group. Please send verification code into the group. You will get PTT at once!",
+    "join": "join",
+    "word": "中文",
+    "toast": "wrong!",
+    "group": "Enter",
+    "recordTitle": "Records",
+    "recordButton": "Withdraw PTT to ERC20 Wallet",
+    "recordMore": "No more record",
+    "recordTip": "Any questions please contact info@proton.global",
+    "verification": "Verification"
+}

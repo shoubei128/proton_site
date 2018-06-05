@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <!--<meta name="theme-color" content="#000000">-->
+    <meta content="email=no" name="format-detection" />
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <title>Proton Token 千万糖果大放送，等你来瓜分！</title>
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="shortcut icon" href="img/logo.png" type="./img/x-icon">
+    <script src="./js1/fontSize.js"></script>
+    <script src="./untils/until.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="top-img">
+            <img src="./img/bg-en.png" alt="">
+            <div class="top-top-title" id="top-top-title" i18n="word">
+            </div>
+        </div>
+        <div class="telegram">
+            <!-- <div class="telegram-top"></div> -->
+            <div style="text-align:center;margin-top: 15px;margin-bottom: 5px;">
+                <img src="./img/logo.png" alt="" style="width: 15%;margin: 0 auto;">
+            </div>
+            <a class="telegram-middle" href="https://t.me/joinchat/G-waH0ZcAlvQPPBf5l3dsQ">
+                <div class=" telegram-middle-text" i18n="indexhead">
+                </div>
+            </a>
+            <!-- <div class="telegram-bottom">
+                <div class="telegram-bottom-one"></div>
+                <div class="telegram-bottom-two"></div>
+            </div> -->
+        </div>
+        <div class="footer">
+            <div class="footer-main">
+                <div id="fail">
+                    <p class="fail-message" i18n="toast">您填写的地址格式错误！请重新填写！</p>
+                </div>
+                <input class="footer-text" type="text" placeholder="Input your ETH wallet address" maxlength="42" id="a" style="margin-bottom: 10px;"/>
+                <input class="footer-text" name="email" type="text" placeholder="Input your Email address" id="e" style="margin-bottom: 10px;"/>
+                <input class="footer-text" name="captcha" type="text" placeholder="Input your captcha" id="c" style="width: 67%;margin-bottom: 25px;padding-right:0;float: left;"/>
+                <button type="button" class="footer-btn" style="width: 30%;margin: 0 0 25px 0;font-size: 0.22rem;float: right;" onclick="getVerifyCode()" id="verify-code" i18n="verification">获取验证码</button>
+            </div>
+            <div>
+                <button type="button" class="footer-btn" onclick="check()" i18n="btn">提取PTT</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js1/index.js"></script>   
+    <script src="./js1/jquery-3.3.1.min.js"></script>
+    <script src="./js1/jquery.i18n.min.js"></script>
+    <script src="./fetch/ajax.js"></script>
+    <script type="text/javascript">
+        function check() {
+            console.log(checkAddress($("#a").val()));
+            console.log(($("#a").val()));
+            if (!checkAddress($("#a").val())) {
+                // alert("wrong");
+                var fail=document.getElementById("fail");
+                fail.style.display="block";
+                setTimeout(
+                    function(){
+                        fail.style.display="none";
+                    },1000);
+            }else{
+                addressAjax() ;
+                //alert("married")
+            }
+        }
+
+        function getVerifyCode() {
+            console.log('getVerifyCode');
+            
+            var ordertime = 60;   //设置再次发送验证码等待时间
+            var timeleft = ordertime;
+            var btn = $("#verify-code");
+            var lang = untils.getItem('lang');
+
+            var phone=$("#e");
+            if (lang == 'cn') {
+                var reg = /^1[0-9]{10}$/;   //电话号码的正则匹配式
+                if (!reg.test(phone.val())){
+                    alert("请输入正确的手机号码"); //当号码符合规则后发送验证码按钮可点击
+                    return;
+                }
+                var api = 'http://api.bangtuike.com.cn/api/v1/account/sms_send?phone=' + phone.val();
+            } else {
+                var reg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;   //邮箱的正则匹配式
+                if (!reg.test(phone.val())){
+                    alert("Please enter the correct mailbox."); //当号码符合规则后发送验证码按钮可点击
+                    return;
+                }
+                var api = 'http://api.bangtuike.com.cn/api/v1/account/email_send?email=' + phone.val();
+            }
+
+            btn.attr("disabled",true); //防止多次点击
+            //ajax请求 向后台发送 获取验证码请求
+            $.ajax({
+                url: api,
+                type: "get",
+                success: function (response) {
+                    if (lang == 'cn') {
+                        if (response.code == 0) {
+                            alert('验证码已发送，请注意查收');
+                        } else {
+                            alert(response.message);
+                        }
+                    } else {
+                        if (response.code == 0) {
+                            alert('The verification code has been sent. Please check.');
+                        } else {
+                            alert('The verification code is not sent. Please try again later.');
+                        }
+                    }
+                },
+                error: function (response) {
+                    alert("Error");
+                }
+            });
+            timeCount(this);
+            //计时函数
+            function timeCount(){
+                lang = untils.getItem('lang');
+                timeleft -= 1;
+                if (timeleft > 0){
+                    if (lang == 'cn') {
+                        btn.text(timeleft + " 秒后重发");
+                    } else {
+                        btn.text(timeleft + " s");
+                    }
+                    setTimeout(timeCount , 1000);
+                } else {
+                    if (lang == 'cn') {
+                        btn.text("重新发送");
+                    } else {
+                        btn.text("Send Again");
+                    }
+                    timeleft = ordertime;    //重置等待时间
+                    btn.removeAttr("disabled");
+                }
+            }
+        }
+
+        function checkAddress(str) {
+            var reg = /^0x[0-9a-fA-F]{40}$/;
+            return reg.test(str);
+        }
+
+        // 国际化
+        $(document).ready(function () {
+            /*默认语言*/
+            var defaultLang = "en";
+            var lang = "lang";
+            untils.setItem(lang , defaultLang);
+            $("[i18n]").i18n({
+                defaultLang: defaultLang,
+                filePath: "./i18n/",
+                filePrefix: "i18n_",
+                fileSuffix: "",
+                forever: true,
+                callback: function () {
+                    console.log("i18n has been completed.");
+                }
+            });
+            if (untils.getItem(lang) == "cn") {
+                 $("[i18n]").i18n({
+                     defaultLang: "en",
+                     filePath: "./i18n/",
+                     filePrefix: "i18n_",
+                     fileSuffix: ""
+                });
+                imgTem = "./img/bg-en.png";
+                place = "Input your ETH wallet address";
+                place_other = "Input your Email address";
+                place_captcha = "Input your captcha";
+                type = "email";
+                untils.setItem(lang, "en")
+            } else {
+                 $("[i18n]").i18n({
+                     defaultLang: "cn",
+                     filePath: "./i18n/",
+                     filePrefix: "i18n_",
+                     fileSuffix: ""
+                });
+                imgTem = "./img/bg.png";
+                place = "输入你的ETH钱包地址";
+                place_other = "输入你的手机号码";
+                place_captcha = "输入验证码";
+                type = "phone";
+                untils.setItem(lang, "cn")
+            }
+            $(".top-img img").attr('src', imgTem);
+            $("#a").attr('placeholder', place);
+            $("#e").attr('placeholder', place_other).attr('name', type);
+            $("#c").attr('placeholder', place_captcha).attr('name', type);
+            /*切换为中文 - 按钮*/
+            var imgTem = "";
+            var place = "";
+            var place_other = "";
+            var type = "";
+            $("#top-top-title").click(function() {
+                if (untils.getItem(lang) == "cn") {
+                     $("[i18n]").i18n({
+                         defaultLang: "en",
+                         filePath: "./i18n/",
+                         filePrefix: "i18n_",
+                         fileSuffix: ""
+                    });
+                    imgTem = "./img/bg-en.png";
+                    place = "Input your ETH wallet address";
+                    place_other = "Input your Email address";
+                    place_captcha = "Input your captcha";
+                    type = "email";
+                    untils.setItem(lang, "en")
+                }else{
+                     $("[i18n]").i18n({
+                         defaultLang: "cn",
+                         filePath: "./i18n/",
+                         filePrefix: "i18n_",
+                         fileSuffix: ""
+                    });
+                    imgTem = "./img/bg.png";
+                    place = "输入你的ETH钱包地址";
+                    place_other = "输入你的手机号码";
+                    place_captcha = "输入验证码";
+                    type = "phone";
+                    untils.setItem(lang, "cn")
+                }
+                $(".top-img img").attr('src', imgTem);
+                $("#a").attr('placeholder', place);
+                $("#e").attr('placeholder', place_other).attr('name', type);
+                $("#c").attr('placeholder', place_captcha).attr('name', type);
+            });
+
+            // 如果已经输入过地址就跳转到下一页面
+            if (getAddress()) {
+                setTimeout("javascript:location.href='records.html'", 0);
+            }
+        });
+
+        function getAddress() {
+            // 获取上一个页面的数据
+            var detaildata = untils.getCookieValue("address");
+            if (detaildata) {
+                return true
+            } else {
+                return false
+            }
+        }
+        // ajax请求
+        function addressAjax () {
+            if (!$("#c").val() || !$("#e").val()) {
+                if (untils.getItem('lang') == 'cn') {
+                    alert('手机与验证码不能为空');
+                } else {
+                    alert('Email and captcha cannot be empty.');
+                }
+                return;
+            }
+            //var invitecode = untils.getQueryString("code");
+            var params = {
+                ethAddress: $("#a").val(),
+                email : $("[name='email']").val(),
+                phone : $("[name='phone']").val(),
+                captcha : $("#c").val()
+            };
+            untils.setCookie("address",  $("#a").val(), 2);   //设置cookie
+            // if (invitecode) {
+            //     params = { 
+            //         ethAddress: $("#a").val(),
+            //         inviteCode : invitecode,
+            //         email : $("[name='email']").val(),
+            //         phone : $("[name='phone']").val()
+            //     }
+            // }else{
+            //     params = {
+            //         ethAddress: $("#a").val(),
+            //         email : $("[name='email']").val(),
+            //         phone : $("[name='phone']").val()
+            //     }
+            // }
+            var api = 'http://api.bangtuike.com.cn/api/v1/proton/register';
+            $.ajax({
+                url: api,
+                type: "post",
+                data: params,
+                success: function (response) {
+                    if (response.code == 0) {
+                        // 成功回调
+                        var keydata = response.data;
+                        // 将接口数据存入localstorage以便下一个页面使用
+                        untils.setItem("detaildata", keydata);
+                        setTimeout("javascript:location.href='records.html'", 1000);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function (response) {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
