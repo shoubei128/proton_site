@@ -21,7 +21,7 @@
         $('#fullpage').fullpage({
             'verticalCentered': true,
             'css3': true,
-            'anchors': ['pages1','pages2','pages3','pages4','pages5','pages6','pages7','pages8','pages9','pages10','pages11', 'pages12', 'pages13'],
+            'anchors': ['pages1','pages2','pages3','pages4','pages5','pages6','pages7','pages8','pages9','pages10','pages11'],
             'menu':'#fh5co-primary-menu',
             'navigation': true,
             'navigationPosition': 'right',
