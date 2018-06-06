@@ -1542,7 +1542,10 @@ input{
 .logo-top {
   padding-top: 30px;
 }
-.news-padding-left-100 {padding-left: 100px;}
+.top-1{
+  padding-top: 1%;
+}
+.news-padding-left-100 {padding-left: 16%;}
 @media (max-width: 768px) {
     .logo-top {padding-top: 15px;}
     .news-padding-left-100 {padding-left: 12%;}
