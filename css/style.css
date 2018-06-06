@@ -1,6 +1,6 @@
 /* =======================================================
 *
-* 	Template Style 
+* 	Template Style
 *	Edit this section
 *
 * ======================================================= */
@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", Arial, sans-serif;
   font-weight: 400;
   margin: 0 0 30px 0;
-  
+
 }
 
 figure {
@@ -234,9 +234,9 @@ input{
     font-size: 1.5em;
     width: 12em;
     background-color: transparent;
-    border-top-width: 0px; 
+    border-top-width: 0px;
     border-right-width: 0px;
-    border-left-width:0px; 
+    border-left-width:0px;
     border-bottom-color: white;
     margin: 1em;
 }
@@ -768,7 +768,7 @@ input{
   line-hight:24px;
   text-align: middle;
   color: white;
-  
+
 }
 .feature-left .feature-copy p {
   font-size: 0.9em;
@@ -973,7 +973,7 @@ input{
 
 #fh5co-services, #fh5co-about, #fh5co-contact,#fh5co-feature-product,.padding-top-bottom  {
   padding: 6em 0 0 0;
-  
+
 }
 @media screen and (max-width: 768px) {
   #fh5co-services, #fh5co-about, #fh5co-contact,#fh5co-feature-product,.padding-top-bottom {
@@ -1538,3 +1538,11 @@ input{
 .section {
   background-size: cover;
 }
+
+.logo-top {
+  padding-top: 30px;
+}
+@media (max-width: 768px) {
+    .logo-top {padding-top: 15px;}
+}
+
