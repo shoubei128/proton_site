@@ -193,7 +193,7 @@
             params = {
                 ethAddress: untils.getCookieValue("address")
             };
-            var api = 'http://api.bangtuike.com.cn/api/v1/proton/detail?ethAddress=' + untils.getCookieValue("address");
+            var api = 'https://api.bangtuike.com.cn/api/v1/proton/detail?ethAddress=' + untils.getCookieValue("address");
             $.ajax({
                 url: api,
                 type: "get",
@@ -202,7 +202,7 @@
                     if (response.code == 0) {
                         // 成功回调
                         var useData = response.data;
-                        var newurl = "http://proton.global/share.html?code=" + useData.inviteCode;
+                        var newurl = "https://proton.global/share.html?code=" + useData.inviteCode;
                         var newText = "PTT发糖果，入群可领288个，邀请一人奖励188个，入群链接 " + newurl;
                         $("#two").html("/" + useData.checkCode);//验证码
                         $("#one").html(newurl);//邀请链接

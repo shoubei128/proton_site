@@ -99,14 +99,14 @@
                     alert("请输入正确的手机号码"); //当号码符合规则后发送验证码按钮可点击
                     return;
                 }
-                var api = 'http://api.bangtuike.com.cn/api/v1/account/sms_send?phone=' + phone.val();
+                var api = 'https://api.bangtuike.com.cn/api/v1/account/sms_send?phone=' + phone.val();
             } else {
                 var reg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;   //邮箱的正则匹配式
                 if (!reg.test(phone.val())){
                     alert("Please enter the correct mailbox."); //当号码符合规则后发送验证码按钮可点击
                     return;
                 }
-                var api = 'http://api.bangtuike.com.cn/api/v1/account/email_send?email=' + phone.val();
+                var api = 'https://api.bangtuike.com.cn/api/v1/account/email_send?email=' + phone.val();
             }
 
             btn.attr("disabled",true); //防止多次点击
@@ -295,7 +295,7 @@
             //         phone : $("[name='phone']").val()
             //     }
             // }
-            var api = 'http://api.bangtuike.com.cn/api/v1/proton/register';
+            var api = 'https://api.bangtuike.com.cn/api/v1/proton/register';
             $.ajax({
                 url: api,
                 type: "post",

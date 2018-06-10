@@ -103,7 +103,7 @@
             var params = {
                 ethAddress: untils.getCookieValue("address"),
             };
-            var api = 'http://api.bangtuike.com.cn/api/v1/proton/award';
+            var api = 'https://api.bangtuike.com.cn/api/v1/proton/award';
             $.ajax({
                 url: api,
                 type: "post",
@@ -134,7 +134,7 @@
             var params = {
                 ethAddress: untils.getCookieValue("address"),
             };
-            var api = 'http://api.bangtuike.com.cn/api/v1/proton/record?ethAddress=' + untils.getCookieValue("address");
+            var api = 'https://api.bangtuike.com.cn/api/v1/proton/record?ethAddress=' + untils.getCookieValue("address");
             $.ajax({
                 url: api,
                 type: "get",
