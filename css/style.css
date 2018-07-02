@@ -1560,3 +1560,24 @@ input{
   width: 70%;
 }
 
+.teleGram {
+    position: fixed;
+    z-index: 99999;
+    font-size: 14px;
+    right: 20px;
+    bottom: 20px;
+    height: 47px;
+    background: #31b0d5;
+
+    line-height: 47px;
+    border-radius: 25px;
+    text-align: center;
+    padding: 0 15px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-weight: 700;
+}
+.teleGram img {
+  width: 20%;
+}
+
