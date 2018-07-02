@@ -1550,4 +1550,11 @@ input{
     .logo-top {padding-top: 15px;}
     .news-padding-left-100 {padding-left: 12%;}
 }
+.m-l-r-5 {
+  margin-left: 5%;
+  margin-right: 5%;
+}
 
+.logo-top img{
+  width: 70%;
+}
