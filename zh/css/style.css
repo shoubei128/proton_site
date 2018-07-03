@@ -1578,3 +1578,16 @@ input{
 .teleGram img {
   width: 20%;
 }
+.hr-null-margin{
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+}
+.footer{
+  background-color: #000000;
+  color: #FFFFFF;
+  position: relative;
+  top:150px;
+}
+.m-t-30{
+  margin-top:30px;
+}
