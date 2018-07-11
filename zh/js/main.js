@@ -21,7 +21,7 @@
         $('#fullpage').fullpage({
             'verticalCentered': true,
             'css3': true,
-            'anchors': ['pages1','pages2','pages3','pages4','pages5','pages6','pages7','pages8','pages9','pages10','pages11','pages12','pages13','pages14','pages15'],
+            'anchors': ['pages1','pages2','pages3','pages4','pages5','pages6','pages7','pages8','pages9','pages10','pages11','pages12','pages13'],
             'menu':'#fh5co-primary-menu',
             'navigation': true,
             'navigationPosition': 'right',
@@ -43,12 +43,8 @@
                 if(index>=8&&index<11){
                     $('li#li-team').addClass("li_border");
                 }
-                if(index>=11 && index<14){
+                if(index>=11){
                     $('li#li-connect').addClass("li_border");
-                }
-
-                if(index>=14){
-                    $('li#li-news').addClass("li_border");
                 }
 
                 let ind = index - 1;

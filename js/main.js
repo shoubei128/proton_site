@@ -43,12 +43,8 @@
                 if(index>=8&&index<11){
                     $('li#li-team').addClass("li_border");
                 }
-                if(index>=11 && index<14){
+                if(index>=11){
                     $('li#li-connect').addClass("li_border");
-                }
-
-                if(index>=14){
-                    $('li#li-news').addClass("li_border");
                 }
 
                 let ind = index - 1;
